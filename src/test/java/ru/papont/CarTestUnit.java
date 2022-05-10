@@ -2,6 +2,10 @@ package ru.papont;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.lang.reflect.Method;
 
@@ -31,6 +35,16 @@ class CarTestUnit {
         car.setNumber("ABCD-1234");
         assertEquals("ABCD-1234", car.getNumber());
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"ABCD-1234", "DEF-456", "DFG-678"})
+    @NullSource
+    @EmptySource
+    void testSetNumberMultipleValues(String number) {
+        car.setNumber(number);
+        assertEquals(number, car.getNumber());
+    }
+
 
     @Test
     void getYear() {
