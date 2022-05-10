@@ -7,7 +7,7 @@ public class Car {
     private String number;
     private int year;
     private String owner;
-    private ArrayList<String> owners = new ArrayList<String>();
+    private ArrayList<String> owners = new ArrayList<>();
 
     public Car(String manufacturer, String number, int year, String owner) {
         this.manufacturer = manufacturer;
