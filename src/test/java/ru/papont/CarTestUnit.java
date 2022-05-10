@@ -3,6 +3,7 @@ package ru.papont;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -37,14 +38,20 @@ class CarTestUnit {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"ABCD-1234", "DEF-456", "DFG-678"})
-    @NullSource
-    @EmptySource
-    void testSetNumberMultipleValues(String number) {
+    @CsvSource({"'ABCD-123', 'ABCD-123'",
+            "'DEF-456', 'DEF-456'"})
+    void testSetNumberMultipleValues(String number, String x) {
         car.setNumber(number);
-        assertEquals(number, car.getNumber());
+        assertEquals(x, car.getNumber());
     }
 
+    @ParameterizedTest
+    @CsvSource({"1, 5",
+                "8, 12",
+                "32, 36"})
+    void testInt(int input, int output) {
+        assertEquals(output, car.testInt(input));
+    }
 
     @Test
     void getYear() {
