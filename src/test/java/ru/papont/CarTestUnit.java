@@ -3,6 +3,8 @@ package ru.papont;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Method;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarTestUnit {
@@ -55,6 +57,18 @@ class CarTestUnit {
     void getListOfTwoOwners() {
         car.setOwner("mamont");
         assertArrayEquals(new String[] {"papont", "mamont"}, car.getOwners().toArray());
+    }
+
+    @Test
+    void testPrivateMethod() {
+        try {
+            Method method = Car.class.getDeclaredMethod("testMethod", null);
+            method.setAccessible(true);
+
+            assertEquals("abc", method.invoke(car).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
